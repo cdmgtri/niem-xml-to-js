@@ -1,0 +1,63 @@
+{
+  "$schema": "",
+  "@context": {
+    "ext": "#",
+    "nc": "#",
+    "j": "#",
+    "structures": "#"
+  },
+  "ext:PassportExchange": {
+    "nc:Passport": {
+      "structures:metadata": "",
+      "nc:DocumentEffectiveDate": {
+        "nc:Date": {
+          "rdf:value": "",
+          "@id": ""
+        }
+      },
+      "nc:DocumentExpirationDate": {
+        "nc:Date": ""
+      },
+      "nc:PassportNumberIdentification": {
+        "nc:IdentificationID": ""
+      },
+      "nc:PersonName": {
+        "nc:PersonGivenName": "",
+        "nc:PersonMiddleName": [
+          "",
+          ""
+        ],
+        "nc:PersonSurName": ""
+      },
+      "nc:PersonBirthDate": {
+        "nc:Date": ""
+      },
+      "nc:PersonBirthLocation": {
+        "nc:Address": {
+          "nc:LocationState": {
+            "nc:StateISO3166Code": ""
+          },
+          "nc:LocationCountry": {
+            "nc:LocationCountryISO3166Alpha3Code": ""
+          }
+        }
+      },
+      "nc:PassportCategoryCode": "",
+      "ext:PersonCitizenshipISO3166Alpha3Code": "",
+      "nc:PassportIssuingOrganization": {
+        "nc:OrganizationName": ""
+      },
+      "j:PersonSexCode": "",
+      "ext:PassportMinorIndicator": false,
+      "ext:PassportExpeditedIndicator": false,
+      "ext:PassportRenewalIndicator": false
+    },
+    "nc:Metadata": {
+      "@id": "",
+      "nc:ReportedDate": {
+        "nc:Date": ""
+      },
+      "nc:ReportingPersonText": ""
+    }
+  }
+}

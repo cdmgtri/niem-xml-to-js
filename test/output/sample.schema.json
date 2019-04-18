@@ -1,0 +1,174 @@
+{
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "@context": {
+      "type": "object",
+      "properties": {
+        "ext": {
+          "type": "string",
+          "format": "uri"
+        },
+        "nc": {
+          "type": "string",
+          "format": "uri"
+        },
+        "j": {
+          "type": "string",
+          "format": "uri"
+        },
+        "structures": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "ext:PassportExchange": {
+      "type": "object",
+      "properties": {
+        "nc:Passport": {
+          "type": "object",
+          "properties": {
+            "structures:metadata": {
+              "type": "string"
+            },
+            "nc:DocumentEffectiveDate": {
+              "type": "object",
+              "properties": {
+                "nc:Date": {
+                  "type": "object",
+                  "properties": {
+                    "rdf:value": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "@id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "nc:DocumentExpirationDate": {
+              "type": "object",
+              "properties": {
+                "nc:Date": {
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            },
+            "nc:PassportNumberIdentification": {
+              "type": "object",
+              "properties": {
+                "nc:IdentificationID": {
+                  "type": "string"
+                }
+              }
+            },
+            "nc:PersonName": {
+              "type": "object",
+              "properties": {
+                "nc:PersonGivenName": {
+                  "type": "string"
+                },
+                "nc:PersonMiddleName": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "nc:PersonSurName": {
+                  "type": "string"
+                }
+              }
+            },
+            "nc:PersonBirthDate": {
+              "type": "object",
+              "properties": {
+                "nc:Date": {
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            },
+            "nc:PersonBirthLocation": {
+              "type": "object",
+              "properties": {
+                "nc:Address": {
+                  "type": "object",
+                  "properties": {
+                    "nc:LocationState": {
+                      "type": "object",
+                      "properties": {
+                        "nc:StateISO3166Code": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "nc:LocationCountry": {
+                      "type": "object",
+                      "properties": {
+                        "nc:LocationCountryISO3166Alpha3Code": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "nc:PassportCategoryCode": {
+              "type": "string"
+            },
+            "ext:PersonCitizenshipISO3166Alpha3Code": {
+              "type": "string"
+            },
+            "nc:PassportIssuingOrganization": {
+              "type": "object",
+              "properties": {
+                "nc:OrganizationName": {
+                  "type": "string"
+                }
+              }
+            },
+            "j:PersonSexCode": {
+              "type": "string"
+            },
+            "ext:PassportMinorIndicator": {
+              "type": "boolean"
+            },
+            "ext:PassportExpeditedIndicator": {
+              "type": "boolean"
+            },
+            "ext:PassportRenewalIndicator": {
+              "type": "boolean"
+            }
+          }
+        },
+        "nc:Metadata": {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string"
+            },
+            "nc:ReportedDate": {
+              "type": "object",
+              "properties": {
+                "nc:Date": {
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            },
+            "nc:ReportingPersonText": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

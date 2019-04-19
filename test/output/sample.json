@@ -1,5 +1,4 @@
 {
-  "$schema": "",
   "@context": {
     "ext": "http://example.com/exchanges/passport-exchange/extension/1.0#",
     "nc": "http://release.niem.gov/niem/niem-core/4.0/#",

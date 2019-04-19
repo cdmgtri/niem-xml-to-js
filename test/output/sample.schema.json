@@ -1,9 +1,6 @@
 {
   "type": "object",
   "properties": {
-    "$schema": {
-      "type": "string"
-    },
     "@context": {
       "type": "object",
       "properties": {

@@ -4,8 +4,17 @@
  * Transform the XML -> JS object to meet NIEM JSON guidance
  */
 function applyNIEMTransformations(obj) {
-  transformXMLHeader(obj);
-  transformAugmentations(obj);
+
+  // Initialize the NIEM JS object
+  let niemObj = {
+    "@context": {},
+    ...JSON.parse( JSON.stringify(obj) )
+  };
+
+  transformXMLHeader(niemObj);
+  transformAugmentations(niemObj);
+
+  return niemObj;
 }
 
 /**
@@ -15,7 +24,7 @@ function applyNIEMTransformations(obj) {
  */
 function transformXMLHeader(obj) {
 
-  let root = Object.values(obj)[2];
+  let root = Object.values(obj)[1];
 
   if (!root) {
     return obj;

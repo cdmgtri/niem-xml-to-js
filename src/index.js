@@ -30,10 +30,10 @@ class niemXMLtoJS {
   async convertXML() {
     if (!this.niemObj) {
       this.unconvertedObj = await convertXMLtoJS(this.xml, false);
-      this.niemObj = convertJStoNIEM(this.unconvertedObj);
+      this.niemObj = niemTransform(this.unconvertedObj);
 
       let unconvertedTemplate = await convertXMLtoJS(this.xml, true);
-      this.niemTemplate = convertJStoNIEM(unconvertedTemplate);
+      this.niemTemplate = niemTransform(unconvertedTemplate);
     }
     return Promise.resolve(this.niemObj);
   }
@@ -110,23 +110,5 @@ async function convertXMLtoJS(xml, template=false) {
   return convertedObj;
 }
 
-
-/**
- * Process the results of the XML conversion to JS object
- */
-function convertJStoNIEM(obj) {
-
-  // Initialize the NIEM JS object
-  let niemObj = {
-    $schema: "",
-    "@context": {},
-    ...JSON.parse( JSON.stringify(obj) )
-  };
-
-  // Apply custom transformations for NIEM JSON
-  niemTransform(niemObj);
-
-  return niemObj;
-}
 
 module.exports = niemXMLtoJS;

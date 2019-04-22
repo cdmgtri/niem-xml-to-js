@@ -28,6 +28,14 @@
           "type": "string",
           "format": "uri"
         },
+        "structures:metadata": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string"
+            }
+          }
+        },
         "rdf": {
           "type": "string",
           "format": "uri"
@@ -196,7 +204,10 @@
               "type": "string"
             },
             "structures:metadata": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "j:ChargeDescriptionText": {
               "type": "string"

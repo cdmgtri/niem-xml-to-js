@@ -4,11 +4,16 @@
     "nc": "",
     "j": "",
     "structures": "",
+    "structures:metadata": {
+      "@type": "@id"
+    },
     "rdf": ""
   },
   "ext:PassportExchange": {
     "nc:Passport": {
-      "structures:metadata": "",
+      "structures:metadata": [
+        ""
+      ],
       "nc:DocumentEffectiveDate": {
         "nc:Date": {
           "rdf:value": "",
@@ -52,12 +57,21 @@
       "ext:PassportExpeditedIndicator": false,
       "ext:PassportRenewalIndicator": false
     },
-    "nc:Metadata": {
-      "@id": "",
-      "nc:ReportedDate": {
-        "nc:Date": ""
+    "nc:Metadata": [
+      {
+        "@id": "",
+        "nc:ReportedDate": {
+          "nc:Date": ""
+        },
+        "nc:ReportingPersonText": ""
       },
-      "nc:ReportingPersonText": ""
-    }
+      {
+        "@id": "",
+        "nc:ReportedDate": {
+          "nc:Date": ""
+        },
+        "nc:ReportingPersonText": ""
+      }
+    ]
   }
 }

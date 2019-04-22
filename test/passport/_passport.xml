@@ -5,7 +5,7 @@
 	xmlns:j="http://release.niem.gov/niem/domains/jxdm/6.1/"
 	xmlns:structures="http://release.niem.gov/niem/structures/4.0/">
 
-	<nc:Passport structures:metadata="m1">
+	<nc:Passport structures:metadata="m1 m2">
 		<nc:DocumentEffectiveDate>
 			<nc:Date structures:id="d1">2010-05-16</nc:Date>
 		</nc:DocumentEffectiveDate>
@@ -52,5 +52,12 @@
 			<nc:Date>2010-05-15</nc:Date>
 		</nc:ReportedDate>
 		<nc:ReportingPersonText>Alice Smith</nc:ReportingPersonText>
+	</nc:Metadata>
+
+	<nc:Metadata structures:id="m2">
+		<nc:ReportedDate>
+			<nc:Date>2012-02-25</nc:Date>
+		</nc:ReportedDate>
+		<nc:ReportingPersonText>Bob Brooks</nc:ReportingPersonText>
 	</nc:Metadata>
 </ext:PassportExchange>

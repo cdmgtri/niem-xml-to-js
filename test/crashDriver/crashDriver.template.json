@@ -6,6 +6,9 @@
     "geo": "",
     "gml": "",
     "structures": "",
+    "structures:metadata": {
+      "@type": "@id"
+    },
     "rdf": ""
   },
   "exch:CrashDriverInfo": {
@@ -72,7 +75,9 @@
     },
     "j:Charge": {
       "@id": "",
-      "structures:metadata": "",
+      "structures:metadata": [
+        ""
+      ],
       "j:ChargeDescriptionText": "",
       "j:ChargeFelonyIndicator": false
     },

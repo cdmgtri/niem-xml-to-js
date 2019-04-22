@@ -4,11 +4,17 @@
     "nc": "http://release.niem.gov/niem/niem-core/4.0/#",
     "j": "http://release.niem.gov/niem/domains/jxdm/6.1/#",
     "structures": "http://release.niem.gov/niem/structures/4.0/#",
+    "structures:metadata": {
+      "@type": "@id"
+    },
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   },
   "ext:PassportExchange": {
     "nc:Passport": {
-      "structures:metadata": "m1",
+      "structures:metadata": [
+        "m1",
+        "m2"
+      ],
       "nc:DocumentEffectiveDate": {
         "nc:Date": {
           "rdf:value": "2010-05-16",
@@ -52,12 +58,21 @@
       "ext:PassportExpeditedIndicator": false,
       "ext:PassportRenewalIndicator": true
     },
-    "nc:Metadata": {
-      "@id": "m1",
-      "nc:ReportedDate": {
-        "nc:Date": "2010-05-15"
+    "nc:Metadata": [
+      {
+        "@id": "m1",
+        "nc:ReportedDate": {
+          "nc:Date": "2010-05-15"
+        },
+        "nc:ReportingPersonText": "Alice Smith"
       },
-      "nc:ReportingPersonText": "Alice Smith"
-    }
+      {
+        "@id": "m2",
+        "nc:ReportedDate": {
+          "nc:Date": "2012-02-25"
+        },
+        "nc:ReportingPersonText": "Bob Brooks"
+      }
+    ]
   }
 }

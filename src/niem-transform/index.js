@@ -3,9 +3,9 @@
 /**
  * Transform the XML -> JS object to meet NIEM JSON guidance
  *
- * @param {boolean} [template=false] True if data should be transferred; false if template
+ * @param {boolean} [isTemplate=false] True if data should be transferred; false if template
  */
-function niemify(obj, template=false) {
+function niemify(obj, isTemplate=false) {
 
   let niemObj = {
 
@@ -15,9 +15,11 @@ function niemify(obj, template=false) {
     ...JSON.parse( JSON.stringify(obj) )
   };
 
-  refactorXMLHeader(niemObj, template);
-  applyAugmentations(niemObj);
   dropNils(niemObj);
+  refactorXMLHeader(niemObj);
+  applyAugmentations(niemObj);
+  processMetadata(niemObj, niemObj["@context"]);
+  addRDF(niemObj, isTemplate);
 
   return niemObj;
 }
@@ -26,9 +28,8 @@ function niemify(obj, template=false) {
  * Moves XML namespace prefix declaration properties to a new '@context' property
  *
  * @param {ObjectConstructor} obj
- * @param {boolean} [template=false] True if data should be transferred; false if template
  */
-function refactorXMLHeader(obj, template) {
+function refactorXMLHeader(obj) {
 
   let root = Object.values(obj)[1];
 
@@ -62,10 +63,20 @@ function refactorXMLHeader(obj, template) {
     }
   }
 
-  let rdf = template ? "" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  context.rdf = rdf;
-
   obj["@context"] = context;
+
+}
+
+/**
+ * Adds rdf to the `@context` object.
+ *
+ * @param {ObjectConstructor} obj
+ * @param {boolean} [isTemplate=false] True if data should be transferred; false if template
+ */
+function addRDF(obj, isTemplate=false) {
+
+  let rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+  obj["@context"].rdf = isTemplate ? "" : rdf;
 
 }
 
@@ -111,16 +122,54 @@ function applyAugmentations(obj) {
 function dropNils(obj) {
 
   if (typeof obj != "object") {
+    // Leaf reached - stop recursion
     return;
   }
 
   for (let key in obj) {
-    console.log(key);
     if (key == "xsi:nil") {
+      // Delete `xsi:nil` property
       delete obj[key];
     }
     else {
+      // Recurse over sub-property
       dropNils(obj[key]);
+    }
+  }
+}
+
+/**
+ * Convert each `structures:metadata` space-delimited string of metadata IDs to
+ * an array of metadata IDs.  Add the type of `structures:metadata` to `@context` to
+ * enable proper referencing.
+ */
+function processMetadata(obj, context) {
+
+  if (typeof obj != "object") {
+    // Leaf reached - stop recursion
+    return;
+  }
+
+  for (let key in obj) {
+
+    if (key == "structures:metadata") {
+
+      // Add the type of `structures:metadata` to the `@context` property
+      context["structures:metadata"] = {
+        "@type": "@id"
+      };
+
+      /** @type {string} */
+      let metadataIDs = obj[key];
+
+      // Convert the space-delimited ID string to an array of ID strings
+      obj[key] = metadataIDs.split(" ");
+
+      return;
+    }
+    else {
+      // Recurse over the sub-object
+      processMetadata(obj[key], context);
     }
   }
 }

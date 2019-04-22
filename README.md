@@ -19,21 +19,12 @@ See the current guidance on [NIEM JSON](http://niem.github.io/json) for more inf
 - [x] Move augmentation properties from augmentation containers to the parent objects
 - [x] Convert `structures:id`, `structures:ref` and `structures:uri` XML attributes to `@id`
 - [x] Drop XML-specific `xsi:nil` attributes
-- [ ] Apply metadata directly to referencing objects
-
-## Outputs
-
-Given a sample NIEM XML instances, the library returns:
-
-- Sample NIEM JSON instance
-- JSON template (matches the sample NIEM JSON instances, with values replaced by empty strings)
-- JSON schema
-
+- [x] Enable `structures:metadata` references, if applicable
+  - [x] convert `structures:metadata` space-delimited string to array of values
+  - [x] define `structures:metadata` type in `@context` as `@id` so values are treated as references, not strings
 
 ## To Do
 
-- [x] Add NIEM JSON's crash example
-- [ ] Add additional transformations differences
 - [ ] Update README and add examples
 - [ ] Add error handling
 - [ ] Add CLI option
@@ -60,5 +51,15 @@ let xml = fs.readFileSync(xmlFilePath, "utf-8");
 let results = await niemXMLtoJSON(xml);
 
 // Option 2: Destructure and assign what you need from the results
-let {originalJSON, niemJSON, niemTemplateJSON, jsonSchema} = await niemXMLtoJSON(xml);
+let {niemJSON, niemTemplateJSON, jsonSchema} = await niemXMLtoJSON(xml);
 ```
+
+## Results
+
+Given a sample NIEM XML instance, the utility returns an object containing the following properties:
+
+Return object | Description
+------------- | -----------
+niemJSON | NIEM XML to NIEM JSON
+niemTemplateJSON | NIEM JSON, with values converted to empty strings for use as a template
+jsonSchema | JSON schema generated from the NIEM JSON representation

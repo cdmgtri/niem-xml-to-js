@@ -20,17 +20,17 @@
       "nc:PersonName": {
         "nc:personNameCommentText": "copied",
         "nc:PersonGivenName": {
-          "rdf:value": "Peter",
-          "nc:sequenceID": 1
+          "nc:sequenceID": 1,
+          "rdf:value": "Peter"
         },
         "nc:PersonMiddleName": [
           {
-            "rdf:value": "Death",
-            "nc:sequenceID": 2
+            "nc:sequenceID": 2,
+            "rdf:value": "Death"
           },
           {
-            "rdf:value": "Bredon",
-            "nc:sequenceID": 3
+            "nc:sequenceID": 3,
+            "rdf:value": "Bredon"
           }
         ],
         "nc:PersonSurName": "Wimsey"

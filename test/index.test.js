@@ -108,8 +108,12 @@ describe("NIEM CrashDriver XML Conversions", () => {
   });
 
   test("NIEM JSON", () => {
-    let ntacJSON = fs.readFileSync(dataFolder + "_ntac-solution.json", "utf-8");
-    expect(niemJSON).toEqual(ntacJSON);
+    let expectedJSON = fs.readFileSync(dataFolder + "_solution.json", "utf-8");
+
+    let niemJS = JSON.parse(niemJSON);
+    let expectedJS = JSON.parse(expectedJSON);
+
+    expect(niemJS).toEqual(expectedJS);
   });
 
 

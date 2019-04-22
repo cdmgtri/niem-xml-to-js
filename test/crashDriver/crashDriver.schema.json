@@ -132,9 +132,6 @@
                       "properties": {
                         "@id": {
                           "type": "string"
-                        },
-                        "xsi:nil": {
-                          "type": "boolean"
                         }
                       }
                     },
@@ -176,9 +173,6 @@
               "properties": {
                 "@id": {
                   "type": "string"
-                },
-                "xsi:nil": {
-                  "type": "boolean"
                 }
               }
             },
@@ -187,9 +181,6 @@
               "properties": {
                 "@id": {
                   "type": "string"
-                },
-                "xsi:nil": {
-                  "type": "boolean"
                 }
               }
             },

@@ -47,8 +47,7 @@
       "j:CrashVehicle": {
         "j:CrashDriver": {
           "nc:RoleOfPerson": {
-            "@id": "P01",
-            "xsi:nil": true
+            "@id": "P01"
           },
           "j:DriverLicense": {
             "j:DriverLicenseCardIdentification": {
@@ -64,12 +63,10 @@
     },
     "j:PersonChargeAssociation": {
       "nc:Person": {
-        "@id": "P01",
-        "xsi:nil": true
+        "@id": "P01"
       },
       "j:Charge": {
-        "@id": "CH01",
-        "xsi:nil": true
+        "@id": "CH01"
       },
       "j:JuvenileAsAdultIndicator": true
     },

@@ -17,6 +17,7 @@ function niemify(obj, template=false) {
 
   refactorXMLHeader(niemObj, template);
   applyAugmentations(niemObj);
+  dropNils(niemObj);
 
   return niemObj;
 }
@@ -101,6 +102,26 @@ function applyAugmentations(obj) {
       applyAugmentations(obj[key]);
     }
 
+  }
+}
+
+/**
+ * Recurse over the object, dropping all `xsi:nil` properties.
+ */
+function dropNils(obj) {
+
+  if (typeof obj != "object") {
+    return;
+  }
+
+  for (let key in obj) {
+    console.log(key);
+    if (key == "xsi:nil") {
+      delete obj[key];
+    }
+    else {
+      dropNils(obj[key]);
+    }
   }
 }
 

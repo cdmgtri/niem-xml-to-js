@@ -18,7 +18,7 @@ See the current guidance on [NIEM JSON](http://niem.github.io/json) for more inf
   - [x] Add the `rdf` namespace to the `@context` property
 - [x] Move augmentation properties from augmentation containers to the parent objects
 - [x] Convert `structures:id`, `structures:ref` and `structures:uri` XML attributes to `@id`
-- [ ] Drop XML-specific `xsi:nil` attributes
+- [x] Drop XML-specific `xsi:nil` attributes
 - [ ] Apply metadata directly to referencing objects
 
 ## Outputs

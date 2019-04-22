@@ -37,11 +37,8 @@
     "j:Crash": {
       "nc:IncidentLocation": {
         "geo:LocationGeospatialPoint": {
-          "@context": {
-            "srsName": "http://www.opengis.net/gml/3.2#srsName"
-          },
           "gml:Point": {
-            "@id": "PT01",
+            "gml:id": "PT01",
             "srsName": "urn:ogc:def:crs:EPSG::4326",
             "gml:pos": "51.835 -0.417"
           }
@@ -57,9 +54,9 @@
               "nc:IdentificationID": "A1234567"
             },
             "nc:ItemLengthMeasure": {
-              "nc:MeasureDecimalValue": 9.7
-            },
-            "nc:LengthUnitCode": "CMT"
+              "nc:MeasureDecimalValue": 9.7,
+              "nc:LengthUnitCode": "CMT"
+            }
           }
         }
       }

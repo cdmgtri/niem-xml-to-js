@@ -1,63 +1,40 @@
 
-# NIEM XML to JS
+# NIEM XML to JSON
 
-This project converts a XML instance to NIEM JSON, JSON Schema, and/or a JavaScript object.
+Build the JSON representation of a NIEM IEPD from a sample XML instance.  This allows developers to use NIEM XML-only tools like the [SSGT](https://tools.niem.gov/niemtools/ssgt/index.iepd) (generate NIEM subsets) and [ConTesA](https://tools.niem.gov/contesa/) (check NDR conformance) to model an exchange without later having to model the JSON representation manually.
+
+See the current guidance on [NIEM JSON](http://niem.github.io/json) for more information on the JSON representation of an IEPD.
 
 ## NIEM Transformations
 
-- [x] Converts XML namespace prefix declarations to `@context` object
-- [x] Moves augmentation properties out of augmentation container to the parent object
-- [x] Converts `structures:id`, `structures:ref` and `structures:uri` attributes to `@id`
-
-## To Do
-
-- Add example outputs to the README
-- Integrate with Travis and Coveralls
-- Add CLI option
-- Build a simple app hosted on GitHub pages so users can convert XML instances without having to run the code
+- [x] Convert a XML instance to JSON using the [node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js) library with the following options:
+  - [x] create arrays only when multiple values are provided in an instance
+  - [x] convert "true" and "false" strings to booleans
+  - [x] use `rdf:value` as the name of the value key for an XML element with both a value and attributes
+  - [x] optionally replace string data with empty quotes to create a JSON template
+- [x] Convert and move root-level XML namespace prefix declarations to a new `@context` property
+- [x] Move augmentation properties from augmentation containers to the parent objects
+- [x] Convert `structures:id`, `structures:ref` and `structures:uri` attributes to `@id`
 
 ## Installation
 
 ```sh
-npm i cdmgtri/niem-xml-to-js
+npm i cdmgtri/niem-xml-to-json
 ```
 
 ## Usage
 
 See the `test/output` folder for sample results.
 
-### Setup
-
 ```js
 let fs = require("fs");
-let niemXMLtoJS = require("niem-xml-to-js");
+let niemXMLtoJSON = require("niem-xml2json");
 
 let xml = fs.readFileSync(xmlFilePath, "utf-8");
 
-let niemXML = new niemXMLtoJS(xml)
-await niemXML.convertXML();
-```
+// Option 1:
+let results = await niemXMLtoJSON(xml);
 
-### Get NIEM JavaScript object
-
-```js
-let obj = niemXML.jsObject();
-```
-
-### Get NIEM JSON
-
-```js
-let json = niemXML.json();
-```
-
-### Get JSON Schema
-
-```js
-let jsonSchema = niemXML.jsonSchema();
-```
-
-### Get NIEM JavaScript as exported object
-
-```js
-let jsFileString = niemXML.jsFileString();
+// Option 2: Destructure and assign what you need from the results
+let {originalJSON, niemJSON, niemTemplateJSON, jsonSchema} = await niemXMLtoJSON(xml);
 ```

@@ -1,9 +1,9 @@
 {
   "@context": {
-    "ext": "#",
-    "nc": "#",
-    "j": "#",
-    "structures": "#"
+    "ext": "",
+    "nc": "",
+    "j": "",
+    "structures": ""
   },
   "ext:PassportExchange": {
     "nc:Passport": {

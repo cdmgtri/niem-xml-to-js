@@ -1,18 +1,15 @@
-
-let IEPD = {
-  "@context": {
-    "ext": "http://example.com/exchanges/passport-exchange/extension/1.0#",
-    "nc": "http://release.niem.gov/niem/niem-core/4.0/#",
-    "j": "http://release.niem.gov/niem/domains/jxdm/6.1/#",
-    "structures": "http://release.niem.gov/niem/structures/4.0/#"
-  },
+{
   "ext:PassportExchange": {
+    "xmlns:ext": "http://example.com/exchanges/passport-exchange/extension/1.0",
+    "xmlns:nc": "http://release.niem.gov/niem/niem-core/4.0/",
+    "xmlns:j": "http://release.niem.gov/niem/domains/jxdm/6.1/",
+    "xmlns:structures": "http://release.niem.gov/niem/structures/4.0/",
     "nc:Passport": {
       "structures:metadata": "m1",
       "nc:DocumentEffectiveDate": {
         "nc:Date": {
           "rdf:value": "2010-05-16",
-          "@id": "d1"
+          "structures:id": "d1"
         }
       },
       "nc:DocumentExpirationDate": {
@@ -48,18 +45,18 @@ let IEPD = {
         "nc:OrganizationName": "United States Department of State"
       },
       "j:PersonSexCode": "M",
-      "ext:PassportMinorIndicator": false,
-      "ext:PassportExpeditedIndicator": false,
-      "ext:PassportRenewalIndicator": true
+      "ext:PassportAugmentation": {
+        "ext:PassportMinorIndicator": false,
+        "ext:PassportExpeditedIndicator": false,
+        "ext:PassportRenewalIndicator": true
+      }
     },
     "nc:Metadata": {
-      "@id": "m1",
+      "structures:id": "m1",
       "nc:ReportedDate": {
         "nc:Date": "2010-05-15"
       },
       "nc:ReportingPersonText": "Alice Smith"
     }
   }
-};
-
-module.exports = IEPD;
+}

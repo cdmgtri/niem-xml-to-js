@@ -3,11 +3,13 @@
 /**
  * Transform the XML -> JS object to meet NIEM JSON guidance
  */
-function applyNIEMTransformations(obj) {
+function niemify(obj) {
 
-  // Initialize the NIEM JS object
   let niemObj = {
+
     "@context": {},
+
+    // Clone the original attribute (deep copy)
     ...JSON.parse( JSON.stringify(obj) )
   };
 
@@ -44,7 +46,14 @@ function transformXMLHeader(obj) {
     }
     else if (key.startsWith("xmlns:")) {
       let prefix = key.replace("xmlns:", "");
-      context[prefix] = root[key] + "#";
+
+      let value = root[key];
+      if (value.length > 0 && !value.endsWith("#")) {
+        // Append a # if not an empty string and does not already end with #
+        value = value + "#";
+      }
+
+      context[prefix] = value;
       delete root[key];
     }
   }
@@ -89,4 +98,4 @@ function transformAugmentations(obj) {
   }
 }
 
-module.exports = applyNIEMTransformations;
+module.exports = niemify;

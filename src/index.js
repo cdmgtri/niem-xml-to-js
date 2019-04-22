@@ -2,91 +2,74 @@
 let { parseString, defaults } = require("xml2js");
 let toJsonSchema = require("to-json-schema");
 
-// Note: xml2jsb boolean value processor currently returns null so created custom fn
-// let { parseBooleans, parseNumbers } = require("xml2js/lib/processors");
+// Note: xml2js parseBooleans value processor returned nulls so created custom fn
+let { parseNumbers, parseBooleans } = require("xml2js/lib/processors");
 
-let niemTransform = require("./niem-transform");
+let niemify = require("./niem-transform");
 let Parsers = require("./parsers/index");
 
-
-class niemXMLtoJS {
-
-  /**
-   * @param {string} xml
-   */
-  constructor(xml) {
-    this.xml = xml;
-
-    /** @type {ObjectConstructor} */
-    this.unconvertedObj = undefined;
-
-    /** @type {ObjectConstructor} */
-    this.niemObj = undefined;
-
-    /** @type {ObjectConstructor} */
-    this.niemTemplate = undefined;
-  }
-
-  async convertXML() {
-    if (!this.niemObj) {
-      this.unconvertedObj = await convertXMLtoJS(this.xml, false);
-      this.niemObj = niemTransform(this.unconvertedObj);
-
-      let unconvertedTemplate = await convertXMLtoJS(this.xml, true);
-      this.niemTemplate = niemTransform(unconvertedTemplate);
-    }
-    return Promise.resolve(this.niemObj);
-  }
-
-  jsObject(template=false) {
-    if (!this.niemObj) throw new Error("Convert XML first");
-    let obj = template ? this.niemTemplate : this.niemObj;
-    return obj;
-  }
-
-  json(template=false, indentSpaces=2) {
-    if (!this.niemObj) throw new Error("Convert XML first");
-    let obj = template ? this.niemTemplate : this.niemObj;
-    return JSON.stringify(obj, null, indentSpaces);
-  }
-
-  jsonSchema() {
-    if (!this.niemObj) throw new Error("Convert XML first");
-    let schema = toJsonSchema(this.niemObj);
-    return JSON.stringify(schema, null, 2);
-  }
-
-  jsFileString(template=false, varName="IEPD") {
-    if (!this.niemObj) throw new Error("Convert XML first");
-
-    let json = this.json(template);
-
-    let js= `\nlet ${varName} = ${json};\n\n`;
-    js += `module.exports = ${varName};\n`
-    return js;
-  }
-
-  originalObject() {
-    if (!this.niemObj) throw new Error("Convert XML first");
-    return this.unconvertedObj;
-  }
-
-}
-
-
+/**
+ * @typedef {Object} resultObjects
+ * @property {Object} originalJSON - See the direct transformation from XML to JSON
+ * @property {Object} niemJSON - NIEM-specific transformations applied
+ * @property {Object} niemTemplateJSON - niemJSON with data values replaced with empty strings
+ * @property {Object} jsonSchema - JSON schema generated from the niemJSON representation
+ */
+let resultObjectsType;
 
 
 /**
- * Convert the given XML instance to a NIEM JavaScript object
+ * Convert the given XML string to JSON, NIEM JSON, NIEM JSON template,
+ * and JSON schema.
+ *
+ *
+ * @param {string} xml - XML instance string
+ * @param {number} indentSpaces - Number of spaces to indent stringified results
+ * @returns {resultObjects}
+ */
+async function niemXMLtoJSON(xml, indentSpaces=2) {
+
+  // Convert XML to JS
+  let originalObj = await convertXMLtoJS(xml, false, false);
+
+  // Convert JS to NIEM JS
+  let niemObj = await convertXMLtoJS(xml);
+  niemObj = niemify(niemObj);
+
+  // Convert XML to NIEM JS template (replace data with empty strings)
+  let originalTemplateObj = await convertXMLtoJS(xml, true);
+  let niemTemplateObj = niemify(originalTemplateObj);
+
+  // Generate JSON schema from NIEM JS
+  let jsonSchema = toJsonSchema(niemObj);
+
+  /** @type {resultObjects} */
+  let results = {
+    originalJSON: JSON.stringify(originalObj, null, indentSpaces),
+    niemJSON: JSON.stringify(niemObj, null, indentSpaces),
+    niemTemplateJSON: JSON.stringify(niemTemplateObj, null, indentSpaces),
+    jsonSchema: JSON.stringify(jsonSchema, null, indentSpaces)
+  };
+
+  return results;
+}
+
+
+/**
+ * Convert the given XML instance to a JavaScript object
  *
  * @param {string} xml
  * @param {boolean} [template=false] - True if data should be replaced with empty values
+ * @param {boolean} [niemify=true]   - True if NIEM parsers should be used
  * @returns {ObjectConstructor}
  */
-async function convertXMLtoJS(xml, template=false) {
+async function convertXMLtoJS(xml, template=false, niemify=true) {
 
-  // Set up parsers based on whether data or empty strings should be returned
-  let valueProcessors = template ? [Parsers.parseTemplate] : [Parsers.parseBooleans];
+  // Convert values for an empty template, or parse booleans and numbers appropriately
+  let valueProcessors = template ? [Parsers.parseTemplate] : [parseNumbers, parseBooleans];
+
+  // If converting to NIEM, convert structures:id, ref, and uri attributes to @id
+  let attrNameProcessors = niemify ? [Parsers.parseID] : [];
 
   let OPTS = defaults["0.2"];
 
@@ -98,7 +81,7 @@ async function convertXMLtoJS(xml, template=false) {
     charkey: "rdf:value",
     valueProcessors,
     attrValueProcessors: valueProcessors,
-    attrNameProcessors: [Parsers.parseID],
+    attrNameProcessors,
   };
 
   // Use xml2js to convert the XML string into a JavaScript object.
@@ -111,4 +94,4 @@ async function convertXMLtoJS(xml, template=false) {
 }
 
 
-module.exports = niemXMLtoJS;
+module.exports = niemXMLtoJSON;

@@ -2,61 +2,88 @@
 let fs = require("fs");
 let path = require("path");
 
-let niemXMLtoJS = require("../src/index");
+let niemXMLtoJSON = require("../src/index");
 
-let xmlFilePath = path.join(__dirname, "sample.xml");
-let outputFolder = path.join(__dirname, "output/");
+let dataFolder;
 
-// Read the sample XML message
-let xml = fs.readFileSync(xmlFilePath, "utf-8");
+let originalJSON;
+let niemJSON;
+let niemTemplateJSON;
+let jsonSchema;
 
-let niemXML = new niemXMLtoJS(xml);
-
-describe("NIEM XML conversions", () => {
+describe("NIEM Passport XML conversions", () => {
 
   beforeAll( async() => {
-    await niemXML.convertXML();
+    dataFolder = path.join(__dirname, "passport/");
+
+    // Read the sample XML message
+    let xml = fs.readFileSync(dataFolder + "_passport.xml", "utf-8");
+
+    // Convert the XML to NIEM JSON
+    let results = await niemXMLtoJSON(xml);
+
+    originalJSON = results.originalJSON;
+    niemJSON = results.niemJSON;
+    niemTemplateJSON = results.niemTemplateJSON;
+    jsonSchema = results.jsonSchema;
+
+    // Save the results to JSON files
+    saveFile("passport.json", niemJSON);
+    saveFile("passport.original.json", originalJSON);
+    saveFile("passport.template.json", niemTemplateJSON);
+    saveFile("passport.schema.json", jsonSchema);
   });
 
-  test("object", () => {
-    let obj = niemXML.jsObject();
+
+  test("Original JSON", () => {
+    let obj = JSON.parse(originalJSON);
+
+    // Should be the same as the NIEM JSON version
     expect(obj["ext:PassportExchange"]["nc:Passport"]["nc:PersonName"]["nc:PersonGivenName"]).toEqual("George");
+
+    // Should have the original augmentation
+    expect(obj["ext:PassportExchange"]["nc:Passport"]).toHaveProperty("ext:PassportAugmentation");
+
+    // Should have the original structures:id
+    expect(obj["ext:PassportExchange"]["nc:Passport"]["nc:DocumentEffectiveDate"]["nc:Date"]).toHaveProperty("structures:id");
   });
 
-  test("json", () => {
-    let json = niemXML.json();
-    saveFile("sample.json", json);
 
-    let objJSON = JSON.stringify( niemXML.jsObject(), null, 2 );
-    expect(json).toEqual(objJSON);
+  test("NIEM JSON", () => {
+    let niemObj = JSON.parse(niemJSON);
+
+    // Should be the same as the original JSON version
+    expect(niemObj["ext:PassportExchange"]["nc:Passport"]["nc:PersonName"]["nc:PersonGivenName"]).toEqual("George");
+
+    // Should have refactored namespace prefix declarations into @context
+    expect(niemObj).toHaveProperty("@context");
+    expect(niemObj["@context"]).toHaveProperty("ext");
+
+    // Should have refactored augmentations
+    expect(niemObj["ext:PassportExchange"]["nc:Passport"]).not.toHaveProperty("ext:PassportAugmentation");
+    expect(niemObj["ext:PassportExchange"]["nc:Passport"]).toHaveProperty("ext:PassportExpeditedIndicator");
+
+    // Should have converted structures:id to @id
+    expect(niemObj["ext:PassportExchange"]["nc:Passport"]["nc:DocumentEffectiveDate"]["nc:Date"]).not.toHaveProperty("structures:id");
+    expect(niemObj["ext:PassportExchange"]["nc:Passport"]["nc:DocumentEffectiveDate"]["nc:Date"]).toHaveProperty("@id");
+
   });
 
-  test("jsonSchema", () => {
-    let jsonSchema = niemXML.jsonSchema();
-    saveFile("sample.schema.json", jsonSchema);
 
-    let schema = JSON.parse(jsonSchema);
-    expect(schema.properties["ext:PassportExchange"].type).toEqual("object");
+  test("NIEM Template JSON", () => {
+    let templateObj = JSON.parse(niemTemplateJSON);
+    expect(templateObj["ext:PassportExchange"]["nc:Passport"]["nc:PersonName"]["nc:PersonGivenName"]).toEqual("");
+  });
+
+
+  test("JSON Schema", () => {
+    let schemaObj = JSON.parse(jsonSchema);
+    expect(schemaObj.properties["ext:PassportExchange"].type).toEqual("object");
   })
 
-  test("jsFileString", () => {
-    let jsFileString = niemXML.jsFileString();
-    saveFile("sample.js", jsFileString);
-
-    let iepd = require("./output/sample.js");
-    expect(iepd["ext:PassportExchange"]["nc:Passport"]["nc:PersonName"]["nc:PersonGivenName"]).toEqual("George");
-  });
-
-
-  test("object template", () => {
-    let template = niemXML.jsObject(true);
-    saveFile("template.json", template, true);
-
-    expect(template["ext:PassportExchange"]["nc:Passport"]["nc:PersonName"]["nc:PersonGivenName"]).toEqual("");
-  });
 });
 
 function saveFile(fileName, data, stringify=false) {
   let text = stringify ? JSON.stringify(data, null, 2) : data;
-  fs.writeFileSync(outputFolder + fileName, text);
+  fs.writeFileSync(dataFolder + fileName, text);
 }

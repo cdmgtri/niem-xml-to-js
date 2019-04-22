@@ -3,7 +3,8 @@
     "ext": "",
     "nc": "",
     "j": "",
-    "structures": ""
+    "structures": "",
+    "rdf": ""
   },
   "ext:PassportExchange": {
     "nc:Passport": {

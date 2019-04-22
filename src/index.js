@@ -38,7 +38,7 @@ async function niemXMLtoJSON(xml, indentSpaces=2) {
 
   // Convert XML to NIEM JS template (replace data with empty strings)
   let originalTemplateObj = await convertXMLtoJS(xml, true);
-  let niemTemplateObj = niemify(originalTemplateObj);
+  let niemTemplateObj = niemify(originalTemplateObj, true);
 
   // Generate JSON schema from NIEM JS
   let jsonSchema = toJsonSchema(niemObj);

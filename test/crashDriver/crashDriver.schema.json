@@ -27,6 +27,10 @@
         "structures": {
           "type": "string",
           "format": "uri"
+        },
+        "rdf": {
+          "type": "string",
+          "format": "uri"
         }
       }
     },

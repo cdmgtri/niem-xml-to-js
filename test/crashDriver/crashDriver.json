@@ -5,7 +5,8 @@
     "nc": "http://release.niem.gov/niem/niem-core/3.0/#",
     "geo": "http://release.niem.gov/niem/adapters/geospatial/3.0/#",
     "gml": "http://www.opengis.net/gml/3.2#",
-    "structures": "http://release.niem.gov/niem/structures/3.0/#"
+    "structures": "http://release.niem.gov/niem/structures/3.0/#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   },
   "exch:CrashDriverInfo": {
     "nc:Person": {

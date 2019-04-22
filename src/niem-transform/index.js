@@ -2,8 +2,10 @@
 
 /**
  * Transform the XML -> JS object to meet NIEM JSON guidance
+ *
+ * @param {boolean} [template=false] True if data should be transferred; false if template
  */
-function niemify(obj) {
+function niemify(obj, template=false) {
 
   let niemObj = {
 
@@ -13,8 +15,8 @@ function niemify(obj) {
     ...JSON.parse( JSON.stringify(obj) )
   };
 
-  transformXMLHeader(niemObj);
-  transformAugmentations(niemObj);
+  refactorXMLHeader(niemObj, template);
+  applyAugmentations(niemObj);
 
   return niemObj;
 }
@@ -23,8 +25,9 @@ function niemify(obj) {
  * Moves XML namespace prefix declaration properties to a new '@context' property
  *
  * @param {ObjectConstructor} obj
+ * @param {boolean} [template=false] True if data should be transferred; false if template
  */
-function transformXMLHeader(obj) {
+function refactorXMLHeader(obj, template) {
 
   let root = Object.values(obj)[1];
 
@@ -58,6 +61,9 @@ function transformXMLHeader(obj) {
     }
   }
 
+  let rdf = template ? "" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  context.rdf = rdf;
+
   obj["@context"] = context;
 
 }
@@ -68,7 +74,7 @@ function transformXMLHeader(obj) {
  *
  * @param {*} obj
  */
-function transformAugmentations(obj) {
+function applyAugmentations(obj) {
 
   if (typeof obj != "object") {
     return;
@@ -92,7 +98,7 @@ function transformAugmentations(obj) {
     }
     else {
       // Recurse
-      transformAugmentations(obj[key]);
+      applyAugmentations(obj[key]);
     }
 
   }

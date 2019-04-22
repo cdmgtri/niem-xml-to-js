@@ -8,18 +8,17 @@ See the current guidance on [NIEM JSON](http://niem.github.io/json) for more inf
 ## NIEM Transformations
 
 - [x] Convert a XML instance to JSON using the [node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js) library with the following options:
-  - [x] create arrays only when multiple values are provided in an instance
-  - [x] convert "true" and "false" strings to booleans
   - [x] convert number strings to numbers
+  - [x] convert "true" and "false" strings to booleans
+  - [x] create arrays only when multiple values are provided in an instance
   - [x] use `rdf:value` as the name of the value key for an XML element with both a value and attributes
-- [x] Convert and move root-level XML namespace prefix declarations to a new `@context` property
+- [x] Namespace declarations
+  - [x] Move root-level XML namespace prefix declarations to a new `@context` property
+  - [x] Add a `#` to the end of target namespaces if not already present
+  - [x] Add the `rdf` namespace to the `@context` property
 - [x] Move augmentation properties from augmentation containers to the parent objects
-- [x] Convert `structures:id`, `structures:ref` and `structures:uri` attributes to `@id`
-- [ ] Add `rdf` namespace to `@context`
-- [ ] Add local `@context` properties for local namespace prefix declarations
-  - [ ] `srsName`
-  - [ ] add empty `@context` when not defined?
-- [ ] Convert any `id` attribute to `@id`? (`gml:id`)
+- [x] Convert `structures:id`, `structures:ref` and `structures:uri` XML attributes to `@id`
+- [ ] Drop XML-specific `xsi:nil` attributes
 - [ ] Apply metadata directly to referencing objects
 
 ## Outputs

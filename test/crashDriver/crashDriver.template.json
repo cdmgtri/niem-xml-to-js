@@ -1,0 +1,86 @@
+{
+  "@context": {
+    "exch": "",
+    "j": "",
+    "nc": "",
+    "geo": "",
+    "gml": "",
+    "structures": ""
+  },
+  "exch:CrashDriverInfo": {
+    "nc:Person": {
+      "@id": "",
+      "nc:PersonBirthDate": {
+        "nc:Date": ""
+      },
+      "nc:PersonName": {
+        "nc:personNameCommentText": "",
+        "nc:PersonGivenName": {
+          "rdf:value": "",
+          "nc:sequenceID": 0
+        },
+        "nc:PersonMiddleName": [
+          {
+            "rdf:value": "",
+            "nc:sequenceID": 0
+          },
+          {
+            "rdf:value": "",
+            "nc:sequenceID": 0
+          }
+        ],
+        "nc:PersonSurName": ""
+      },
+      "exch:PersonFictionalCharacterIndicator": false
+    },
+    "j:Crash": {
+      "nc:IncidentLocation": {
+        "geo:LocationGeospatialPoint": {
+          "gml:Point": {
+            "gml:id": "",
+            "srsName": "",
+            "gml:pos": ""
+          }
+        }
+      },
+      "j:CrashVehicle": {
+        "j:CrashDriver": {
+          "nc:RoleOfPerson": {
+            "@id": "",
+            "xsi:nil": false
+          },
+          "j:DriverLicense": {
+            "j:DriverLicenseCardIdentification": {
+              "nc:IdentificationID": ""
+            },
+            "nc:ItemLengthMeasure": {
+              "nc:MeasureDecimalValue": 0.1,
+              "nc:LengthUnitCode": ""
+            }
+          }
+        }
+      }
+    },
+    "j:PersonChargeAssociation": {
+      "nc:Person": {
+        "@id": "",
+        "xsi:nil": false
+      },
+      "j:Charge": {
+        "@id": "",
+        "xsi:nil": false
+      },
+      "j:JuvenileAsAdultIndicator": false
+    },
+    "j:Charge": {
+      "@id": "",
+      "structures:metadata": "",
+      "j:ChargeDescriptionText": "",
+      "j:ChargeFelonyIndicator": false
+    },
+    "j:JusticeMetadata": {
+      "@id": "",
+      "j:CriminalInformationIndicator": false
+    }
+  }
+}

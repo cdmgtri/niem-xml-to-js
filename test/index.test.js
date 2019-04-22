@@ -83,6 +83,38 @@ describe("NIEM Passport XML conversions", () => {
 
 });
 
+describe("NIEM CrashDriver XML Conversions", () => {
+
+  beforeAll( async() => {
+    dataFolder = path.join(__dirname, "crashDriver/");
+
+    // Read the sample XML message
+    let xml = fs.readFileSync(dataFolder + "_crashDriver.xml", "utf-8");
+
+    // Convert the XML to NIEM JSON
+    let results = await niemXMLtoJSON(xml);
+
+    originalJSON = results.originalJSON;
+    niemJSON = results.niemJSON;
+    niemTemplateJSON = results.niemTemplateJSON;
+    jsonSchema = results.jsonSchema;
+
+    // Save the results to JSON files
+    saveFile("crashDriver.json", results.niemJSON);
+    saveFile("crashDriver.original.json", results.originalJSON);
+    saveFile("crashDriver.template.json", results.niemTemplateJSON);
+    saveFile("crashDriver.schema.json", results.jsonSchema);
+
+  });
+
+  test("NIEM JSON", () => {
+    let ntacJSON = fs.readFileSync(dataFolder + "_ntac-solution.json", "utf-8");
+    expect(niemJSON).toEqual(ntacJSON);
+  });
+
+
+});
+
 function saveFile(fileName, data, stringify=false) {
   let text = stringify ? JSON.stringify(data, null, 2) : data;
   fs.writeFileSync(dataFolder + fileName, text);

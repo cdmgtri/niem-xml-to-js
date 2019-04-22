@@ -1,0 +1,228 @@
+{
+  "type": "object",
+  "properties": {
+    "@context": {
+      "type": "object",
+      "properties": {
+        "exch": {
+          "type": "string",
+          "format": "uri"
+        },
+        "j": {
+          "type": "string",
+          "format": "uri"
+        },
+        "nc": {
+          "type": "string",
+          "format": "uri"
+        },
+        "geo": {
+          "type": "string",
+          "format": "uri"
+        },
+        "gml": {
+          "type": "string",
+          "format": "uri"
+        },
+        "structures": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "exch:CrashDriverInfo": {
+      "type": "object",
+      "properties": {
+        "nc:Person": {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string"
+            },
+            "nc:PersonBirthDate": {
+              "type": "object",
+              "properties": {
+                "nc:Date": {
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            },
+            "nc:PersonName": {
+              "type": "object",
+              "properties": {
+                "nc:personNameCommentText": {
+                  "type": "string"
+                },
+                "nc:PersonGivenName": {
+                  "type": "object",
+                  "properties": {
+                    "rdf:value": {
+                      "type": "string"
+                    },
+                    "nc:sequenceID": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "nc:PersonMiddleName": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "rdf:value": {
+                        "type": "string"
+                      },
+                      "nc:sequenceID": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "nc:PersonSurName": {
+                  "type": "string"
+                }
+              }
+            },
+            "exch:PersonFictionalCharacterIndicator": {
+              "type": "boolean"
+            }
+          }
+        },
+        "j:Crash": {
+          "type": "object",
+          "properties": {
+            "nc:IncidentLocation": {
+              "type": "object",
+              "properties": {
+                "geo:LocationGeospatialPoint": {
+                  "type": "object",
+                  "properties": {
+                    "gml:Point": {
+                      "type": "object",
+                      "properties": {
+                        "gml:id": {
+                          "type": "string"
+                        },
+                        "srsName": {
+                          "type": "string",
+                          "format": "uri"
+                        },
+                        "gml:pos": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "j:CrashVehicle": {
+              "type": "object",
+              "properties": {
+                "j:CrashDriver": {
+                  "type": "object",
+                  "properties": {
+                    "nc:RoleOfPerson": {
+                      "type": "object",
+                      "properties": {
+                        "@id": {
+                          "type": "string"
+                        },
+                        "xsi:nil": {
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    "j:DriverLicense": {
+                      "type": "object",
+                      "properties": {
+                        "j:DriverLicenseCardIdentification": {
+                          "type": "object",
+                          "properties": {
+                            "nc:IdentificationID": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "nc:ItemLengthMeasure": {
+                          "type": "object",
+                          "properties": {
+                            "nc:MeasureDecimalValue": {
+                              "type": "number"
+                            },
+                            "nc:LengthUnitCode": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "j:PersonChargeAssociation": {
+          "type": "object",
+          "properties": {
+            "nc:Person": {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                },
+                "xsi:nil": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "j:Charge": {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                },
+                "xsi:nil": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "j:JuvenileAsAdultIndicator": {
+              "type": "boolean"
+            }
+          }
+        },
+        "j:Charge": {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string"
+            },
+            "structures:metadata": {
+              "type": "string"
+            },
+            "j:ChargeDescriptionText": {
+              "type": "string"
+            },
+            "j:ChargeFelonyIndicator": {
+              "type": "boolean"
+            }
+          }
+        },
+        "j:JusticeMetadata": {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string"
+            },
+            "j:CriminalInformationIndicator": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  }
+}

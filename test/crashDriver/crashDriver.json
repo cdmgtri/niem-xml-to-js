@@ -1,0 +1,86 @@
+{
+  "@context": {
+    "exch": "http://example.com/CrashDriver/1.0/#",
+    "j": "http://release.niem.gov/niem/domains/jxdm/5.1/#",
+    "nc": "http://release.niem.gov/niem/niem-core/3.0/#",
+    "geo": "http://release.niem.gov/niem/adapters/geospatial/3.0/#",
+    "gml": "http://www.opengis.net/gml/3.2#",
+    "structures": "http://release.niem.gov/niem/structures/3.0/#"
+  },
+  "exch:CrashDriverInfo": {
+    "nc:Person": {
+      "@id": "P01",
+      "nc:PersonBirthDate": {
+        "nc:Date": "1893-05-04"
+      },
+      "nc:PersonName": {
+        "nc:personNameCommentText": "copied",
+        "nc:PersonGivenName": {
+          "rdf:value": "Peter",
+          "nc:sequenceID": 1
+        },
+        "nc:PersonMiddleName": [
+          {
+            "rdf:value": "Death",
+            "nc:sequenceID": 2
+          },
+          {
+            "rdf:value": "Bredon",
+            "nc:sequenceID": 3
+          }
+        ],
+        "nc:PersonSurName": "Wimsey"
+      },
+      "exch:PersonFictionalCharacterIndicator": true
+    },
+    "j:Crash": {
+      "nc:IncidentLocation": {
+        "geo:LocationGeospatialPoint": {
+          "gml:Point": {
+            "gml:id": "PT01",
+            "srsName": "urn:ogc:def:crs:EPSG::4326",
+            "gml:pos": "51.835 -0.417"
+          }
+        }
+      },
+      "j:CrashVehicle": {
+        "j:CrashDriver": {
+          "nc:RoleOfPerson": {
+            "@id": "P01",
+            "xsi:nil": true
+          },
+          "j:DriverLicense": {
+            "j:DriverLicenseCardIdentification": {
+              "nc:IdentificationID": "A1234567"
+            },
+            "nc:ItemLengthMeasure": {
+              "nc:MeasureDecimalValue": 9.7,
+              "nc:LengthUnitCode": "CMT"
+            }
+          }
+        }
+      }
+    },
+    "j:PersonChargeAssociation": {
+      "nc:Person": {
+        "@id": "P01",
+        "xsi:nil": true
+      },
+      "j:Charge": {
+        "@id": "CH01",
+        "xsi:nil": true
+      },
+      "j:JuvenileAsAdultIndicator": true
+    },
+    "j:Charge": {
+      "@id": "CH01",
+      "structures:metadata": "MD01",
+      "j:ChargeDescriptionText": "Wild Driving",
+      "j:ChargeFelonyIndicator": false
+    },
+    "j:JusticeMetadata": {
+      "@id": "MD01",
+      "j:CriminalInformationIndicator": true
+    }
+  }
+}

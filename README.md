@@ -1,22 +1,23 @@
 
 # NIEM XML to JSON
 
-[![Build Status](https://travis-ci.org/cdmgtri/niem-xml-to-json.svg?branch=dev)](https://travis-ci.org/cdmgtri/niem-xml-to-json)
-[![Coverage Status](https://coveralls.io/repos/github/cdmgtri/niem-xml-to-json/badge.svg?branch=dev)](https://coveralls.io/github/cdmgtri/niem-xml-to-json?branch=dev)
+[![Build Status](https://travis-ci.org/cdmgtri/niem-xml-to-json.svg)](https://travis-ci.org/cdmgtri/niem-xml-to-json)
+[![Coverage Status](https://coveralls.io/repos/github/cdmgtri/niem-xml-to-json/badge.svg)](https://coveralls.io/github/cdmgtri/niem-xml-to-json)
 
 Build the JSON representation of a NIEM IEPD from a sample XML instance.  This allows developers to use NIEM XML-only tools like the [SSGT](https://tools.niem.gov/niemtools/ssgt/index.iepd) (generate NIEM subsets) and [ConTesA](https://tools.niem.gov/contesa/) (check NDR conformance) to model an exchange without later having to model the JSON representation manually.
 
 See the current guidance on [NIEM JSON](http://niem.github.io/json) for more information on the JSON representation of an IEPD.
 
-- [NIEM Transformations](#niem-transformations)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Results](#results)
-- [Examples](#examples)
-  - [Sample XML input](#sample-xml-input)
-  - [Output: Sample NIEM JSON](#output-sample-niem-json)
-  - [Output: NIEM JSON Template](#output-niem-json-template)
-  - [Output: JSON Schema](#output-json-schema)
+- [NIEM Transformations](#NIEM-Transformations)
+- [Installation](#Installation)
+- [Usage](#Usage)
+- [Results](#Results)
+- [Examples](#Examples)
+  - [Sample XML input](#Sample-XML-input)
+  - [Output: Sample NIEM JSON](#Output-Sample-NIEM-JSON)
+  - [Output: NIEM JSON Template](#Output-NIEM-JSON-Template)
+  - [Output: JSON Schema](#Output-JSON-Schema)
+- [JSON-LD syntax references](#JSON-LD-syntax-references)
 
 ## NIEM Transformations
 
@@ -35,6 +36,9 @@ See the current guidance on [NIEM JSON](http://niem.github.io/json) for more inf
 - [x] Enable `structures:metadata` references, if applicable
   - [x] convert `structures:metadata` space-delimited string to array of values
   - [x] define `structures:metadata` type in `@context` as `@id` so values are treated as references, not strings
+
+
+
 
 ## Installation
 
@@ -307,3 +311,15 @@ See the [test](./test) folder for more.
 ### Output: JSON Schema
 
 See [example Passport exchange JSON schema](./test/passport/passport.schema.json) for a sample JSON schema.
+
+## JSON-LD syntax references
+
+See the references below for other ideas for the NIEM JSON representation:
+
+- Default namespace prefix using @context/@vocab
+  - https://w3c.github.io/json-ld-syntax/#default-vocabulary
+- Other references
+  - https://www.w3.org/TR/json-ld/#sets-and-lists
+  - https://stackoverflow.com/questions/52877462/how-to-enforce-an-array-on-type-in-jsonld
+  - https://w3c.github.io/json-ld-syntax/#typed-values
+  - https://w3c.github.io/json-ld-syntax/#embedding

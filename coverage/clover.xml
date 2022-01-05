@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1641421014579" clover="3.2.0">
+  <project timestamp="1641421014579" name="All files">
+    <metrics statements="85" coveredstatements="82" conditionals="50" coveredconditionals="47" methods="11" coveredmethods="11" elements="146" coveredelements="140" complexity="0" loc="85" ncloc="85" packages="3" files="3" classes="3"/>
+    <package name="src">
+      <metrics statements="22" coveredstatements="22" conditionals="7" coveredconditionals="7" methods="3" coveredmethods="3"/>
+      <file name="index.js" path="C:\git\cdmgtri\niem-xml-to-json\src\index.js">
+        <metrics statements="22" coveredstatements="22" conditionals="7" coveredconditionals="7" methods="3" coveredmethods="3"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
+        <line num="69" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="72" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="74" count="6" type="stmt"/>
+        <line num="77" count="6" type="stmt"/>
+        <line num="88" count="6" type="stmt"/>
+        <line num="89" count="6" type="stmt"/>
+        <line num="90" count="6" type="stmt"/>
+        <line num="93" count="6" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.niem-transform">
+      <metrics statements="52" coveredstatements="49" conditionals="30" coveredconditionals="27" methods="6" coveredmethods="6"/>
+      <file name="index.js" path="C:\git\cdmgtri\niem-xml-to-json\src\niem-transform\index.js">
+        <metrics statements="52" coveredstatements="49" conditionals="30" coveredconditionals="27" methods="6" coveredmethods="6"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="36" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="40" count="4" type="stmt"/>
+        <line num="42" count="4" type="stmt"/>
+        <line num="43" count="36" type="cond" truecount="4" falsecount="0"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="47" count="34" type="cond" truecount="1" falsecount="1"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="52" count="34" type="cond" truecount="2" falsecount="0"/>
+        <line num="53" count="20" type="stmt"/>
+        <line num="55" count="20" type="stmt"/>
+        <line num="56" count="20" type="cond" truecount="4" falsecount="0"/>
+        <line num="58" count="10" type="stmt"/>
+        <line num="61" count="20" type="stmt"/>
+        <line num="62" count="20" type="stmt"/>
+        <line num="66" count="4" type="stmt"/>
+        <line num="78" count="4" type="stmt"/>
+        <line num="79" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="91" count="204" type="cond" truecount="2" falsecount="0"/>
+        <line num="92" count="114" type="stmt"/>
+        <line num="95" count="90" type="stmt"/>
+        <line num="97" count="204" type="cond" truecount="2" falsecount="0"/>
+        <line num="100" count="4" type="stmt"/>
+        <line num="102" count="4" type="stmt"/>
+        <line num="104" count="8" type="stmt"/>
+        <line num="108" count="4" type="stmt"/>
+        <line num="113" count="200" type="stmt"/>
+        <line num="124" count="222" type="cond" truecount="2" falsecount="0"/>
+        <line num="126" count="126" type="stmt"/>
+        <line num="129" count="96" type="stmt"/>
+        <line num="130" count="224" type="cond" truecount="2" falsecount="0"/>
+        <line num="132" count="6" type="stmt"/>
+        <line num="136" count="218" type="stmt"/>
+        <line num="148" count="148" type="cond" truecount="2" falsecount="0"/>
+        <line num="150" count="80" type="stmt"/>
+        <line num="153" count="68" type="stmt"/>
+        <line num="155" count="148" type="cond" truecount="2" falsecount="0"/>
+        <line num="158" count="4" type="stmt"/>
+        <line num="163" count="4" type="stmt"/>
+        <line num="166" count="4" type="stmt"/>
+        <line num="168" count="4" type="stmt"/>
+        <line num="172" count="144" type="stmt"/>
+        <line num="177" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.parsers">
+      <metrics statements="11" coveredstatements="11" conditionals="13" coveredconditionals="13" methods="2" coveredmethods="2"/>
+      <file name="index.js" path="C:\git\cdmgtri\niem-xml-to-json\src\parsers\index.js">
+        <metrics statements="11" coveredstatements="11" conditionals="13" coveredconditionals="13" methods="2" coveredmethods="2"/>
+        <line num="11" count="66" type="cond" truecount="4" falsecount="0"/>
+        <line num="12" count="10" type="stmt"/>
+        <line num="14" count="56" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="18" count="53" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="52" type="stmt"/>
+        <line num="31" count="62" type="cond" truecount="5" falsecount="0"/>
+        <line num="32" count="18" type="stmt"/>
+        <line num="34" count="44" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

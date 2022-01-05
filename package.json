@@ -1,13 +1,14 @@
 {
   "name": "niem-xml-to-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Convert a NIEM XML instance to NIEM JSON, a NIEM JSON template (data values replaced with empty strings and other default values), and a JSON Schema generated from the instance.",
   "main": "src/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:cov": "jest --coverage"
   },
   "keywords": [],
   "author": "",

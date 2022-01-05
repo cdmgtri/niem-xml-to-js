@@ -1,0 +1,28 @@
+
+name: build
+
+on: [push, pull_request]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: ./
+
+    - name: Install
+      run: npm install
+
+    - name: Run tests
+      run: npm --loglevel warn run test:cov
+
+    - name: Check code coverage
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
